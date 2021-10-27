@@ -8,8 +8,8 @@ dasbus==1.4
 dbus-python==1.2.16
 decorator==4.4.2
 distro==1.5.0
-grpcio==1.38.0
-grpcio-tools==1.38.0
+grpcio==1.26.0
+grpcio-tools==1.26.0
 more-itertools==8.8.0
 olefile==0.46
 packaging==20.9
@@ -18,3 +18,5 @@ python-dateutil==2.8.1
 requests==2.25.1
 requests-file==1.5.1
 requests-ftp==0.3.1
+falco~=0.4.0
+kubernetes~=18.20.0
