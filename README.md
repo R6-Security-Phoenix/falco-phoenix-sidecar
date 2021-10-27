@@ -6,7 +6,7 @@ the affected Pod's annotation whenever a new Falco event occurs.
 
 ## Getting started
 
-###Prerequisites
+### Prerequisites
 Have [Helm](https://helm.sh/) and [Kustomize](https://kustomize.io/) installed
 
 ### Installing the chart
@@ -47,3 +47,6 @@ helm uninstall falco-phoenix
 ```
 
 ### Test functionality
+To test the functionality you can easily trigger `Read sensitive file untrusted` Falco event by
+``kubectl exec -it <example-pod-name> -- cat /etc/shadow``. By reading the sidecar's log you can see as
+the desired event occurs and being added to the `<example-pod-name>`'s annotations. 
