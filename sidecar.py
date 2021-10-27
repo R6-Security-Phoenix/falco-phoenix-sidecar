@@ -23,8 +23,8 @@ def add_annotation_to_pod(pod_name, namespace, event_name):
     )
     new_event_list = []
     if pod_config.metadata.annotations is not None:
-        if pod_config.metadata.annotations["phoenix.r6security.com/falcoevent"] is not None:
-            events_str = pod_config.metadata.annotations["phoenix.r6security.com/falcoevent"]
+        if pod_config.metadata.annotations[annotation_key] is not None:
+            events_str = pod_config.metadata.annotations[annotation_key]
             new_event_list = json.loads(events_str)
             while len(new_event_list) >= int(max_num_of_events):
                 earliest_event = None
@@ -46,7 +46,7 @@ def add_annotation_to_pod(pod_name, namespace, event_name):
             }
         }
     }
-    logging.info("New event item added to annotation with key %s in pod %s", "phoenix.r6security.com/falcoevent", pod_name)
+    logging.info("New event item added to annotation with key %s in pod %s", annotation_key, pod_name)
     try:
         api.patch_namespaced_pod(
             name=pod_name,
@@ -57,8 +57,8 @@ def add_annotation_to_pod(pod_name, namespace, event_name):
         logging.warning("Exception when calling CoreV1Api->patch_namespaced_pod: %s\n", e)
 
 
-max_num_of_events = os.environ['MAXIMUM_NUMBER_OF_EVENTS']
-annotation_key = os.environ['ANNOTATION_KEY']
+max_num_of_events = os.environ.get('MAXIMUM_NUMBER_OF_EVENTS', "5")
+annotation_key = os.environ.get('ANNOTATION_KEY', "phoenix.r6security.com/falcoevent")
 logging.basicConfig(level=logging.INFO)
 falco_client = falco.Client(endpoint="unix:///var/run/falco/falco.sock",
                             client_crt="/tmp/client.crt",
