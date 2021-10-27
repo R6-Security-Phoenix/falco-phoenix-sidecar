@@ -43,10 +43,10 @@ RUN apk add --no-cache \
     libxml2 \
     libstdc++
 
-WORKDIR /app
 # copy the python dependencies
 COPY --from=builder /install /usr/local
 
-COPY . .
+WORKDIR /app
+COPY ./sidecar.py .
 
-CMD [ "python3", "my.py"]
+CMD [ "python3", "sidecar.py"]
