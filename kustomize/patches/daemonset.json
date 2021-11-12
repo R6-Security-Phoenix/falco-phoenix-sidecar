@@ -3,7 +3,7 @@
    "path": "/spec/template/spec/containers/-",
    "value": {
      "name": "python",
-     "image": "falco-sidecar:1",
+     "image": "phoenixop/falco-phoenix-sidecar:latest",
      "env":[
        {
          "name": "MAXIMUM_NUMBER_OF_EVENTS",
